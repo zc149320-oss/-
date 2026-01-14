@@ -103,7 +103,7 @@ def fetch_live_data():
         except: continue
     if not all_rows: return pd.DataFrame()
     return pd.DataFrame(all_rows).drop_duplicates(subset=['期号']).sort_values(by='期号', ascending=False)
-    # --- 3. 界面展现与“零误差”结算系统 ---
+# --- 3. 界面展现与“零误差”结算系统 ---
 st.set_page_config(page_title="AI 神经网络-最终优化版", layout="wide")
 
 # 持久化状态初始化
