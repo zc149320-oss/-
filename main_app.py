@@ -1,4 +1,27 @@
 import streamlit as st
+# --- 访问密码保护 ---
+def check_password():
+    def password_entered():
+        if st.session_state["password"] == "666888":  # 这里设置你的密码
+            st.session_state["password_correct"] = True
+            del st.session_state["password"]
+        else:
+            st.session_state["password_correct"] = False
+
+    if "password_correct" not in st.session_state:
+        st.text_input("请输入实战授权码", type="password", on_change=password_entered, key="password")
+        st.warning("🔒 此系统受保护，仅限内部使用")
+        return False
+    elif not st.session_state["password_correct"]:
+        st.text_input("请输入实战授权码", type="password", on_change=password_entered, key="password")
+        st.error("❌ 密码错误，请重新输入")
+        return False
+    else:
+        return True
+
+if not check_password():
+    st.stop()  # 密码不对就停止执行后面的代码
+# ------------------
 import pandas as pd
 import requests
 import time
@@ -179,4 +202,5 @@ if not df.empty:
     st.write("### 📜 最新数据原始走势")
     st.table(df.head(10))
     time.sleep(5)
+
     st.rerun()
