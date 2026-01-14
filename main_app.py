@@ -1,4 +1,3 @@
-import streamlit as st
 # --- 访问密码保护 ---
 def check_password():
     def password_entered():
@@ -22,6 +21,7 @@ def check_password():
 if not check_password():
     st.stop()  # 密码不对就停止执行后面的代码
 # ------------------
+import streamlit as st
 import pandas as pd
 import requests
 import time
@@ -202,5 +202,4 @@ if not df.empty:
     st.write("### 📜 最新数据原始走势")
     st.table(df.head(10))
     time.sleep(5)
-
     st.rerun()
