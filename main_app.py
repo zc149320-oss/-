@@ -1,3 +1,4 @@
+import streamlit as st
 # --- 访问密码保护 ---
 def check_password():
     def password_entered():
@@ -21,7 +22,6 @@ def check_password():
 if not check_password():
     st.stop()  # 密码不对就停止执行后面的代码
 # ------------------
-import streamlit as st
 import pandas as pd
 import requests
 import time
@@ -103,7 +103,7 @@ def fetch_live_data():
         except: continue
     if not all_rows: return pd.DataFrame()
     return pd.DataFrame(all_rows).drop_duplicates(subset=['期号']).sort_values(by='期号', ascending=False)
-# --- 3. 界面展现与“零误差”结算系统 ---
+    # --- 3. 界面展现与“零误差”结算系统 ---
 st.set_page_config(page_title="AI 神经网络-最终优化版", layout="wide")
 
 # 持久化状态初始化
@@ -203,5 +203,3 @@ if not df.empty:
     st.table(df.head(10))
     time.sleep(5)
     st.rerun()
-
-
